@@ -26,7 +26,8 @@ def add_credits(email, amount):
     """Add credits to a user's account."""
     user = get_user_by_email(email)
     if user is None:
-        raise ValueError(f"User with email {email} not found")
+        # Raise an exception if the email is not found
+        raise ValueError(f"User with email '{email}' not found")
     user["credits"] += amount
     return user["credits"]
 
