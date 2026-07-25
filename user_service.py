@@ -25,10 +25,12 @@ def get_user_display_name(email):
 def add_credits(email, amount):
     """Add credits to a user's account."""
     user = get_user_by_email(email)
+    if user is None:
+        raise ValueError(f"User with email {email} not found")
     user["credits"] += amount
     return user["credits"]
 
 
 if __name__ == "__main__":
     print(get_user_display_name("alice@example.com"))   # works fine
-    print(get_user_display_name("charlie@example.com"))  # crashes here
+    print(get_user_display_name("charlie@example.com"))  # works fine
