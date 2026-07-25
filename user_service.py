@@ -1,0 +1,34 @@
+"""
+Simple in-memory user service used to demo user lookups and account credits.
+"""
+
+USERS = {
+    "alice@example.com": {"name": "Alice", "credits": 100},
+    "bob@example.com": {"name": "Bob", "credits": 50},
+}
+
+
+def get_user_by_email(email):
+    """Look up a user by email address."""
+    user = USERS.get(email)
+    return user
+
+
+def get_user_display_name(email):
+    """Return a friendly display name for the given user's email."""
+    user = get_user_by_email(email)
+    # BUG: if the email is not found, `user` is None, and this line
+    # crashes with: AttributeError: 'NoneType' object has no attribute 'get'
+    return user["name"].upper()
+
+
+def add_credits(email, amount):
+    """Add credits to a user's account."""
+    user = get_user_by_email(email)
+    user["credits"] += amount
+    return user["credits"]
+
+
+if __name__ == "__main__":
+    print(get_user_display_name("alice@example.com"))   # works fine
+    print(get_user_display_name("charlie@example.com"))  # crashes here
