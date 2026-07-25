@@ -17,8 +17,8 @@ def get_user_by_email(email):
 def get_user_display_name(email):
     """Return a friendly display name for the given user's email."""
     user = get_user_by_email(email)
-    # BUG: if the email is not found, `user` is None, and this line
-    # crashes with: AttributeError: 'NoneType' object has no attribute 'get'
+    if user is None:
+        return "Unknown User"
     return user["name"].upper()
 
 
