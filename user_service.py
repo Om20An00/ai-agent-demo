@@ -11,8 +11,10 @@ USERS = {
 
 def get_user_by_email(email):
     """Look up a user by email address."""
-    email = format_email(email)
-    user = USERS.get(email)
+    formatted_email = format_email(email)
+    if formatted_email is None:
+        return None
+    user = USERS.get(formatted_email)
     return user
 
 
