@@ -1,6 +1,7 @@
 """
 Simple in-memory user service used to demo user lookups and account credits.
 """
+from models import format_email
 
 USERS = {
     "alice@example.com": {"name": "Alice", "credits": 100},
@@ -10,6 +11,7 @@ USERS = {
 
 def get_user_by_email(email):
     """Look up a user by email address."""
+    email = format_email(email)
     user = USERS.get(email)
     return user
 
